@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+psycopg2-binary
+pymongo
+
+# OpenTelemetry stack
+opentelemetry-api
+opentelemetry-sdk
+opentelemetry-instrumentation-fastapi
+opentelemetry-exporter-prometheus
+prometheus-client
