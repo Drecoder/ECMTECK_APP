@@ -10,17 +10,17 @@ on:
 
 build_and_test:
   runs-on: ubuntu-latest
-  # We use 'services' to spin up the required databases for integration tests.
-  # This mirrors your docker-compose file.
-  services:
-    postgres:
-      image: postgres:15
-      env:
-        POSTGRES_USER: postgres
-        POSTGRES_PASSWORD: postgres
-        POSTGRES_DB: appdb
-      ports:
-        - 5432:5432
+# We use 'services' to spin up the required databases for integration tests.
+# This mirrors your docker-compose file.
+services:
+  postgres:
+    image: postgres:15
+    env:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: appdb
+    ports:
+      - 5432:5432
     options: >-
         --health-cmd pg_isready
         --health-interval 10s
