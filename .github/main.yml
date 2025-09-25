@@ -1,5 +1,13 @@
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
 build_and_test:
-runs-on: ubuntu-latest
+  runs-on: ubuntu-latest
 # We use 'services' to spin up the required databases for integration tests.
 # This mirrors your docker-compose file.
 services:
