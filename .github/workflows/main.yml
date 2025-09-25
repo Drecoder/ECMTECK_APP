@@ -133,9 +133,7 @@ steps:
       file: ./frontend/Dockerfile
       push: true
       tags: ${{ env.DOCKERHUB_USERNAME }}/${{ env.FRONTEND_IMAGE_NAME }}:latest, ${{ env.DOCKERHUB_USERNAME }}/${{ env.FRONTEND_IMAGE_NAME }}:${{ github.sha }}
-===============================================
-Continuous Deployment (CD)
-===============================================
+
 deploy:
 name: Deploy to Production
 runs-on: ubuntu-latest
