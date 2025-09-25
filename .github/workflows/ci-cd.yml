@@ -11,7 +11,7 @@ on:
 build_and_test:
   runs-on: ubuntu-latest
 # We use 'services' to spin up the required databases for integration tests.
-# This mirrors your docker-compose file.
+# This mirrors your Docker-Compose file.
 services:
   postgres:
     image: postgres:15
