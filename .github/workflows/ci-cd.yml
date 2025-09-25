@@ -10,28 +10,26 @@ on:
 
 build_and_test:
   runs-on: ubuntu-latest
-# We use 'services' to spin up the required databases for integration tests.
-# This mirrors your docker-compose file.
-services:
-  postgres:
-    image: postgres:15
-    env:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: appdb
-    ports:
-      - 5432:5432
+  # We use 'services' to spin up the required databases for integration tests.
+  # This mirrors your docker-compose file.
+  services:
+    postgres:
+      image: postgres:15
+      env:
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: postgres
+        POSTGRES_DB: appdb
+      ports:
+        - 5432:5432
     options: >-
-      --health-cmd pg_isready
-      --health-interval 10s
-      --health-timeout 5s
-      --health-retries 5
-      
-  mongo:
-    image: mongo:6
-    ports:
-      - 27017:27017
-
+        --health-cmd pg_isready
+        --health-interval 10s
+        --health-timeout 5s
+        --health-retries 5
+    mongo:
+      image: mongo:6
+      ports:
+        - 27017:27017   # Default MongoDB port  
 steps:
   - name: Checkout Code
     uses: actions/checkout@v4
@@ -135,13 +133,12 @@ steps:
       file: ./frontend/Dockerfile
       push: true
       tags: ${{ env.DOCKERHUB_USERNAME }}/${{ env.FRONTEND_IMAGE_NAME }}:latest, ${{ env.DOCKERHUB_USERNAME }}/${{ env.FRONTEND_IMAGE_NAME }}:${{ github.sha }}
-
-deploy:
-name: Deploy to Production
-runs-on: ubuntu-latest
-needs: build_and_test
-if: github.ref == 'refs/heads/main'
-
+jobs:
+  deploy:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+    needs: build_and_test
+    if: github.ref == 'refs/heads/main'
 # This is a conceptual stage. You will need to customize this based on your
 # hosting provider (e.g., Kubernetes, AWS ECS, Google Cloud Run).
 steps:
